@@ -1,0 +1,25 @@
+{
+  "name": "basic-puppeteer",
+  "version": "1.0.0",
+  "description": "automated software testing with basic-puppeteer",
+  "main": "index.js",
+  "scripts": {
+    "//test": "echo \"Error: no test specified\" && exit 1",
+    "test": "./node_modules/mocha/bin/mocha.js --timeout=30000 ./tests"
+  },
+  "keywords": [
+    "puppeteer",
+    "mocha",
+    "chai",
+    "automation",
+    "udemy"
+  ],
+  "author": "zie",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.3.10",
+    "mocha": "^10.2.0",
+    "prettier": "^3.1.1",
+    "puppeteer": "^21.6.1"
+  }
+}
