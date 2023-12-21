@@ -15,6 +15,7 @@ describe('My First Puppeteer Test', ()=> {
         await page.goto('https://example.com/') //telling to the 'page' to visit the url
         await new Promise(resolve => setTimeout(resolve, 3000)) //wait for the promise resolve the 3000ms timeout
         await page.waitForSelector('h1') //one example of 'assertion'. To make sure the url is working = to check the element is exist. if true, then move on. if false, it will throw an error
+        await page.reload() //could refresh the browser
         await browser.close() //close the browser
     })
 })
