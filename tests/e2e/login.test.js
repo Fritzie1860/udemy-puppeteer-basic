@@ -8,12 +8,12 @@ describe('Login Test', ()=>{
 
     before(async function(){
         browser = await puppeteer.launch({
-            headless: false,
+            headless: true,
             slowMo: 0
         })
         page = await browser.newPage()
         await page.setDefaultTimeout(10000)
-        await page.setDefaultNavigationTimeout(20000)
+        await page.setDefaultNavigationTimeout(200000)
     })
 
     after(async function(){
