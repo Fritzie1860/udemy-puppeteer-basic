@@ -11,6 +11,9 @@ describe('Device Emulation', ()=>{
             headless: false,
             slowMo: 10
         })
+        // to open incognito browser -> set up an anonymous browser context, then pass to a new page func
+        const context = await browser.createIncognitoBrowserContext()
+        page = await context.newPage()
 
         page = await browser.newPage()
         await page.setDefaultTimeout(10000)

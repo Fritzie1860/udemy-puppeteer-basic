@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "//test": "echo \"Error: no test specified\" && exit 1",
-    "test": "./node_modules/mocha/bin/mocha.js --timeout=300000 ./tests",
+    "test:example": "./node_modules/mocha/bin/mocha.js --timeout=300000 ./tests/example.test.js",
     "test:device": "./node_modules/mocha/bin/mocha.js --timeout=300000 ./tests/device.test.js"
   },
   "keywords": [

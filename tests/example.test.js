@@ -2,6 +2,9 @@ const { before } = require('mocha')
 const puppeteer = require('puppeteer')
 const expect = require('chai').expect //only pull out expect -> '.expect'
 
+// import the customize command from helper.js
+const {click, getCount, getText, shouldNotExist, typeText, waitForText} = require('../lib/helpers')
+
 // 'describe' or describe block is wrapper around the test suite/steps
 // no need to start any selenium server or some other external service. Replaced by 2 lines of code
 // good to know: all these puppeteer actions have 30s default timeout
@@ -69,19 +72,25 @@ describe('My First Puppeteer Test', ()=> {
         await page.select('#preferred-interface', 'Both') //calling select, get the selector and put the specific value option
         
         // confirm the test result with assertion
-        await page.waitForTimeout(1000)
-        await page.click('#submit-button')
+        // await page.waitForSelector('#submit-button')
+        // await page.click('#submit-button')
+        // try to use helpers func
+        await click(page, '#submit-button')
         await page.waitForSelector('.result-content')
 
         // extract the text content from element
         await page.goto('https://example.com/')
         const title = await page.title()
         const url = await page.url()
-        const text = await page.$eval('h1', element => element.textContent) //store in the var -> using evaluate or $eval function, 1st arg is selector, 2nd arg is callback func or promise
-        
-        // count the element
-        const count = await page.$$eval('p', element => element.length) //it will count p tags on the page
+        //const text = await page.$eval('h1', element => element.textContent) //store in the var -> using evaluate or $eval function, 1st arg is selector, 2nd arg is callback func or promise
+        // try to use helpers func
+        const text = await getText(page, 'h1')
         console.log('Text in the h1: ' + text)
+
+        // count the element
+        //const count = await page.$$eval('p', element => element.length) //it will count p tags on the page
+        // try to use helpers func
+        const count = await getCount(page, 'p')
         console.log('p tags on the page: ' + count)
 
         // verify that the text and count result are correct using expect as assertion
@@ -100,7 +109,8 @@ describe('My First Puppeteer Test', ()=> {
         await page.waitForXPath('//h1') //need to passing the element in the xpatch format instead of classic selector
 
         // verofy that the element is not longer exist
-        await page.waitForSelector('#submit-button', {hidden: true}) //it will reverse the effect of wait for selector, it will be waiting until the selector is hidden
-
+        // try to use helpers func
+        //await page.waitForSelector('#submit-button', {hidden: true}) //it will reverse the effect of wait for selector, it will be waiting until the selector is hidden
+        await shouldNotExist(page, '#submit-button')
     })
 })
