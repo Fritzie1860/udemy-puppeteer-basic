@@ -9,9 +9,12 @@ describe('Submitting Feedback', ()=>{
 
     before(async function(){
         browser = await puppeteer.launch({
-            headless: true,
-            slowMo: 0
+            headless: false,
+            slowMo: 20
         })
+        const context = await browser.createIncognitoBrowserContext()
+        page = await context.newPage()
+
         page = await browser.newPage()
         await page.setDefaultTimeout(10000)
         await page.setDefaultNavigationTimeout(20000)
@@ -30,8 +33,8 @@ describe('Submitting Feedback', ()=>{
     it('Submit feedback', async function(){
         await page.waitForSelector('form')
         await page.type('#name', 'Zie')
-        await page.type('#email', 'zie@gmail.com')
-        await page.type('#subject', 'Feedback')
+        await page.type('#email', 'test@gmail.com')
+        await page.type('#subject', 'Feedback Subject')
         await page.type('#comment', 'This is my feedback')
         await page.click('input[type="submit"]')
         
@@ -40,6 +43,6 @@ describe('Submitting Feedback', ()=>{
     it('Display Result Page', async function(){
         await page.waitForSelector('#feedback-title')
         const url = await page.url()
-        expect(url).to.include('./senFeedback.html')
+        expect(url).to.include('./sendFeedback.html')
     })
 })

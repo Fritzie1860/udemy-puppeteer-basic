@@ -8,9 +8,12 @@ describe('Login Test', ()=>{
 
     before(async function(){
         browser = await puppeteer.launch({
-            headless: true,
-            slowMo: 0
+            headless: false,
+            slowMo: 20
         })
+        const context = await browser.createIncognitoBrowserContext()
+        page = await context.newPage()
+
         page = await browser.newPage()
         await page.setDefaultTimeout(10000)
         await page.setDefaultNavigationTimeout(200000)
@@ -20,12 +23,14 @@ describe('Login Test', ()=>{
         await browser.close()
     })
 
-    beforeEach(async function(){
-        await page.goto('http://zero.webappsecurity.com/index.html')
-        await page.waitForSelector('#signin_button')
-    })
+    // beforeEach(async function(){
+    //     await page.goto('http://zero.webappsecurity.com/index.html')
+    //     await page.waitForSelector('#signin_button')
+    // })
 
     it('Login Test - Invalid Credential (-)', async function(){
+        await page.goto('http://zero.webappsecurity.com/index.html')
+        await page.waitForSelector('#signin_button')
         await page.click('#signin_button')
         await page.waitForSelector('#login_form')
         
@@ -37,6 +42,8 @@ describe('Login Test', ()=>{
     })
 
     it('Login Test - Valid Credential (+)', async function(){
+        await page.goto('http://zero.webappsecurity.com/index.html')
+        await page.waitForSelector('#signin_button')
         await page.click('#signin_button')
         await page.waitForSelector('#login_form')
         
