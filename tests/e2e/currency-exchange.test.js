@@ -1,8 +1,8 @@
-// this file for "E2E: payment + date picker" module
+// this file for "E2E: Currency Exchange" module
 
 const puppeteer = require('puppeteer')
 
-describe('Payment and Date Picker', ()=>{
+describe('Login Test', ()=>{
     let browser
     let page
 
@@ -31,26 +31,19 @@ describe('Payment and Date Picker', ()=>{
         await browser.close()
     })
 
-    it('Display payment form', async function(){
-        await page.waitForSelector('.nav-tab')
+    it('Display currency exchange form', async function(){
+        await page.waitForSelector('.nav-tabs')
         await page.click('#pay_bills_tab')
+        await page.waitForSelector('#tabs > ul > li:nth-child(3) > a')
+        await page.click('#tabs > ul > li:nth-child(3) > a')
         await page.waitForSelector('.board')
-
     })
 
-    it('Make payment ', async function(){
-        await page.select('#sp_payee', 'Apple')
-        await page.select('#sp_account', 'Credit Card')
-        await page.type('#sp_amount','500')
-
-        // interacting with date picker
-        await page.type('#sp_date', '2020-03-18')
-        await page.keyboard.press('Enter')
-        await page.type('#sp_description','note for payment')
-        await page.click('#pay_saved_payees')
-    })
-
-    it('Display result page', async function(){
-        await page.waitForSelector('#alert_content') 
+    it('exchange currency', async function(){
+        await page.select('#pc_currency', 'GBP')
+        await page.type('pc_amount','3000')
+        await page.click('#pc_inDollars_true')
+        await page.click('#purchase_case')
+        await page.waitForSelector('#alert_content')
     })
 })

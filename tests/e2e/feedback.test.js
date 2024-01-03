@@ -9,8 +9,8 @@ describe('Submitting Feedback', ()=>{
 
     before(async function(){
         browser = await puppeteer.launch({
-            headless: false,
-            slowMo: 20
+            headless: true,
+            slowMo: 0
         })
         const context = await browser.createIncognitoBrowserContext()
         page = await context.newPage()
