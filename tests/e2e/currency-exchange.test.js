@@ -2,7 +2,7 @@
 
 const puppeteer = require('puppeteer')
 
-describe('Login Test', ()=>{
+describe('Currency Exchange', ()=>{
     let browser
     let page
 
